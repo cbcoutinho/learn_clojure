@@ -1,10 +1,16 @@
 (ns seesaw-test.core
-    (:use seesaw.core))
+  (:use seesaw.core))
 
-(defn -main [& args]
-    (invoke-later
-                      (-> (frame :title "Hello",
-                                            :content "Hello, Seesaw",
-                                                       :on-close :exit)
-                               pack!
-                                    show!)))
+  (defn -main
+    "The main function"
+    [& args]
+    (defn handler
+      [event]
+      (alert event
+        (str "<html>Hello from <b>Clojure</b>. Button "
+        (.getActionCommand event) " clicked.")))
+
+        (-> (frame :title "Hello Swing" :on-close :exit
+        :content (button :text "Click Me" :listen [:action handler]))
+        pack!
+        show!))
