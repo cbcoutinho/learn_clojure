@@ -1,36 +1,10 @@
-# tutorial
+This repository is work related to the ['Clojure
+Tutorial'](https://youtu.be/ciGyHkDuPAE) video by Derek Banas.
 
-FIXME: description
+To follow along and use the `Leiningen` repl in `vim`, first start a
+headless repl using the following command in the project directory:
 
-## Installation
+    lein trampoline repl :headless &
 
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar tutorial-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+See the following [SO
+answer](https://stackoverflow.com/a/44347904/5536001) for details
