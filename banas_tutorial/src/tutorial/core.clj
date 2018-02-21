@@ -15,5 +15,5 @@
   (str/lower-case str1)
 
   (println (list "Dog" 1 3.41 true))
-  (println (first (list 1 2 3))))
-
+  (println (nth (list 1 2 3) 0))
+  (println (cons 3 (list 1 2))))
