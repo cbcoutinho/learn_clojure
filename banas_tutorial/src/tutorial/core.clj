@@ -12,5 +12,8 @@
   (str/split str1 #"\d")
   (str/replace "I am 42" #"42" "43")
   (str/upper-case str1)
-  (str/lower-case str1))
+  (str/lower-case str1)
+
+  (println (list "Dog" 1 3.41 true))
+  (println (first (list 1 2 3))))
 
