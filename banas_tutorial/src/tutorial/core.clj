@@ -2,40 +2,36 @@
   (:require [clojure.string :as str])
   (:gen-class))
 
-; True, False, and Conditionals
-(defn can-vote
-  [age]
-  (if (>= age 18)
-    (println "You can vote")
-    (println "You can't vote")))
+; Loops
+(defn one-to-x
+  [x]
+  (def i (atom 1))
+  (while (<= @i x)
+    (do
+      (println @i)
+      (swap! i inc))))
 
-(defn can-do-more
-  [age]
-  (if (>= age 18)
-    (do (println "You can drive")
-        (println "You can vote"))))
+(defn double-to-x
+  [x]
+  (dotimes [i x]
+    (println (* i 2))))
 
-(defn when-ex
-  [tof]
-  (when tof
-    (println "1st thing")
-    (println "2nd thing")))
+(defn triple-to-x
+  [x y]
+  (loop [i x]
+    (when (< i y)
+      (println (* i 3))
+      (recur (+ i 1)))))
 
-(defn what-grade
-  [age]
-  (cond
-    (< age 5) (println "Preschool")
-    (= age 5) (println "Kindergarden")
-    (and 
-      (> age 5) 
-      (<= age 18)) (format "Go to grade %d" (- age 5))
-    :else "Go to college"))
+(defn print-list
+  [& nums]
+  (doseq [x nums]
+    (println x)))
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-
-  (can-vote 16)
-  (can-do-more 25)
-  (when-ex true)
-  (what-grade 15))
+  (one-to-x 5)
+  (double-to-x 5)
+  (triple-to-x 1 5)
+  (print-list 7 8 9 10))
