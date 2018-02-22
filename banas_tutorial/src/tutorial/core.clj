@@ -24,7 +24,12 @@
   (println (Math/log10 100))   ;; Base 10 log
   (println (Math/max 1 5))
   (println (Math/min 1 5))
-  (println (Math/pow 2 2)))    ;; Power
+  (println (Math/pow 2 2))     ;; Power
+
+  (println (rand-int 20))      ;; Generate random int
+
+  (println (reduce + [1 2 3])) ;; Use reduce on a vector
+  (println Math/PI))           ;; Math has Pi built in
 
 (defn -main
   "I don't do a whole lot ... yet."
