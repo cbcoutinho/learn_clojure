@@ -25,4 +25,9 @@
   (println (get (set '(1 1 2)) 2))
   (println (get (set '(3 2)) 2))
   (println (contains? (set '(1 2 3)) 4))
-  (println (disj (set '(1 2 3)) 3)))
+  (println (disj (set '(1 2 3)) 3))
+
+  ; Vectors
+  (println (get (vector 3 2 1) 2))
+  (println (pop (vector 1 2 3 4)))
+  (println (subvec (vector 1 2 3 4) 1 3)))
