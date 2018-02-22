@@ -4,15 +4,9 @@
 
 (use 'clojure.java.io)
 
-; Destructuring
-(defn destruct
-  []
-  (def vectVals [1 2 3 4])
-  (let [[one two & the-rest] vectVals]
-    (println one two the-rest)))
+; Struct maps
 
 
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args]
-  (destruct))
+  [& args])
