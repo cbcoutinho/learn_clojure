@@ -1,14 +1,12 @@
 # shouter
 
-A Clojure library designed to ... well, that part is up to you.
+This clojure web app is essentially a message board with a database
+backend using PostgreSQL. It assumes that PostgreSQL is running on
+`localhost` and that there exists a `shouter` database. The `shouter`
+database can have an existing `shouts` table. If the table doesn't
+exist than one will be created.
 
-## Usage
+The tutorial was originally written by someone trying to put a web
+service on the Heroku platform
 
-FIXME
-
-## License
-
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+https://devcenter.heroku.com/articles/clojure-web-application
