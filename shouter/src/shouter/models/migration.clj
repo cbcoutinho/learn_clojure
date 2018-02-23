@@ -2,12 +2,15 @@
   (:require [clojure.java.jdbc :as sql]
             [shouter.models.shout :as shout]))
 
+; Checks to see if `shouts` table exists in database
 (defn migrated? []
   (-> (sql/query shout/spec
                  [(str "select count(*) from information_schema.tables "
                        "where table_name='shouts'")])
       first :count pos?))
 
+; Creates a table called `shouts` with following schema if doesn't
+; exist
 (defn migrate []
   (when (not (migrated?))
     (print "Creating database structure...") (flush)
