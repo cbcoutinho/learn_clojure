@@ -1,5 +1,4 @@
 (ns brave-clojure.core)
- ;(:require [clojure.string]))
 
 (def asym-hobbit-body-parts
   [{:name "head"           :size 3}
