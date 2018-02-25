@@ -2,12 +2,23 @@
   (:require [clojure.test :refer :all]
             [brave-clojure.pure :refer :all]))
 
+; Simple string cleaning
+(deftest clean-test
+  (testing "Clean a string"
+    (is (=
+          (clean "My boa constrictor is so sassy lol!    ")
+          "My boa constrictor is so sassy LOL!"))))
+
 ; character:
 ; {:name "Smooches McCutes"
 ;  :attributes {:intelligence 10
 ;               :strength      4
 ;               :dexterity     5}}
 
+; Get attributes of `character` using composition functions
+;   Essentially:
+;   (= (c-str character) 
+;      ((fn [c] (:strength (:attributes c))) character))
 (deftest comp-test
   (testing "Compositions of functions"
     (is (and
