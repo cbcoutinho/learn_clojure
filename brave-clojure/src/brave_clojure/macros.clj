@@ -7,12 +7,6 @@
   [form]
   (reverse form))
 
-; Trivial usage of a macro
-(backwards (" backwards" " am" "I" str))
-
-(str "To understand what recursion is," " you must first understand recursion.")
-
-(read-string "'(a b c)'")
 
 (defn exclaim
   [exclamation]
@@ -24,20 +18,18 @@
 ;(eval (read-string "(1 + 1)"))
 ; => Error!
 
-(let [infix (read-string "(1 + 1)")]
-  (list (second infix) (first infix) (last infix)))
+;(let [infix (read-string "(1 + 1)")]
+  ;(list (second infix) (first infix) (last infix)))
 ; => (+ 1 1)
 
-(eval 
-  (let [infix (read-string "(1 + 1)")]
-    (list (second infix) (first infix) (last infix))))
+;(eval
+  ;(let [infix (read-string "(1 + 1)")]
+    ;(list (second infix) (first infix) (last infix))))
 ; => 2
 
 (defmacro ignore-last-operand
   [form]
   (butlast form))
-
-(macroexpand '(ignore-last-operand (+ 1 2 10)))
 
 ; Use a macro to make (a + b) => (+ a b)
 (defmacro infix
@@ -45,8 +37,6 @@
   (list (second form)
         (first form)
         (last form)))
-
-(infix (1 + 2))
 
 
 ; With the threading/`stabby` macro, you can pipe input from one
@@ -96,3 +86,39 @@
 
 (code-critic1 (1 + 1) (+ 1 1))
 (code-critic2 (1 + 1) (+ 1 1))
+
+; Clean up the syntax quoting example #2 with the following:
+(defn criticize-code
+  "This function returns a syntax-quoted list"
+  [criticism code]
+  `(println ~criticism (quote ~code)))
+
+(defmacro code-critic3
+  [bad good]
+  `(do ~(criticize-code "Cursed bacteria of Liberia, this is bad code:" bad)
+       ~(criticize-code "Sweet sacred boa of Western and Eastern Samoa, this is good code:" good)))
+
+(code-critic3 (1 + 1) (+ 1 1))
+
+; Use map instead of a call to `do`. Shows how to use `unquote
+; splicing`, which unwraps a `seq`able data structure
+(defmacro code-critic4
+  "Phrases are courtesy of Hermes Conrad from Futurama"
+  [bad good]
+  `(do ~@(map #(apply criticize-code %)
+              [["Sweet lion of Zion, this is bad code:" bad]
+               ["Great cow of Moscow, this is good code:" good]])))
+
+(code-critic4 (1 + 1) (+ 1 1))
+
+; The `gensym` and `auto gensym` constructs keep results of forms for
+; later use within a macro. This the `report` macro, the result of
+; `to-try` is saved in result#, and used in the if statement below.
+; This is different that using executing ~to-try within the macro
+; itself. NOTE: The (quote ~to-try) form does not execute `to-try`.
+(defmacro report
+  [to-try]
+  `(let [result# ~to-try]
+     (if result#
+       (println (quote ~to-try) "was successful:" result#)
+       (println (quote ~to-try) "was not successful:" result#))))
