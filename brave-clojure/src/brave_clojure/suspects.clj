@@ -1,4 +1,7 @@
 (ns brave-clojure.suspects)
+  ; Useful for requiring functions contained in another function
+  ;(:require [brave-clojure.vampire :refer [vampire-database]]))
+
 (def filename "suspects.csv")
 
 (slurp filename)
