@@ -62,3 +62,37 @@
       clojure.java.io/resource
       slurp
       read-string))
+
+(macroexpand '(when (the-cows-come :home)
+                (call me :pappy)
+                (slap me :silly)))
+; => (if (the-cows-come :home)
+;      (do (call me :pappy)
+;          (slap me :silly))
+
+
+;; Two ways to write a `code-critic` macro:
+; Quoting each function individually
+(defmacro code-critic1
+  "Phrases are courtesy of Hermes Conrad from Futurama"
+  [bad good]
+  (list 'do
+        (list 'println
+              "Great squid of Madrid, this is bad code:"
+              (list 'quote bad))
+        (list 'println
+              "Sweet gorilla of Manila, this is good code:"
+              (list 'quote good))))
+
+; Using syntax quoting to 'quote by default', and using `~` to negate
+; the syntax quoting
+(defmacro code-critic2
+  "Phrases are courtesy of Hermes Conrad from Futurama"
+  [bad good]
+  `(do (println "Great squid of Madrid, this is bad code:"
+                (quote ~bad))
+       (println "Sweet gorilla of Manila, this is good code:"
+                (quote ~good))))
+
+(code-critic1 (1 + 1) (+ 1 1))
+(code-critic2 (1 + 1) (+ 1 1))
