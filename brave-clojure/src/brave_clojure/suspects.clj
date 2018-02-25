@@ -2,7 +2,7 @@
   ; Useful for requiring functions contained in another function
   ;(:require [brave-clojure.vampire :refer [vampire-database]]))
 
-(def filename "suspects.csv")
+(def filename "resources/suspects.csv")
 
 (slurp filename)
 
