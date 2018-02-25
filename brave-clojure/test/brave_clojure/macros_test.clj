@@ -4,7 +4,7 @@
 
 (deftest backwards-test
   (testing "Trivial usage of macro"
-    (is (= 
+    (is (=
           "I am backwards"
           (backwards (" backwards" " am" "I" str))))))
 
@@ -23,9 +23,20 @@
 ; Compare different code-critic methods
 (deftest code-critic-test
   (testing "Compares various code-critic implementations"
-    (is (= 
+    (is (=
           (code-critic1 (1 + 1) (+ 1 1))
           (code-critic2 (1 + 1) (+ 1 1))))))
 
 ;(code-critic3 (1 + 1) (+ 1 1))
 ;(code-critic4 (1 + 1) (+ 1 1))
+
+; Re-write `or` as a macro
+(deftest my-or-test
+  (testing "Compares `or` to `my-or`"
+    (is (and
+          (=
+            (or 3 5)
+            (my-or 3 5))
+          (=
+            (or nil 10)
+            (my-or nil 10))))))

@@ -122,3 +122,27 @@
      (if result#
        (println (quote ~to-try) "was successful:" result#)
        (println (quote ~to-try) "was not successful:" result#))))
+
+;  $ (source and)
+;  (defmacro and
+;    "Evaluates exprs one at a time, from left to right. If a form
+;    returns logical false (nil or false), and returns that value and
+;    doesn't evaluate any of the other expressions, otherwise it returns
+;    the value of the last expr. (and) returns true."
+;    {:added "1.0"}
+;    ([] true)
+;    ([x] x)
+;    ([x & next]
+;     `(let [and# ~x]
+;        (if and# (and ~@next) and#))))
+
+(defmacro my-or
+  "Evaluates exprs one at a time, from left to right. If a form
+  returns a logical true value, or returns that value and doesn't
+  evaluate any of the other expressions, otherwise it returns the
+  value of the last expression. (or) returns nil."
+  ([] nil)
+  ([x] x)
+  ([x & next]
+   `(let [my-or# ~x]
+      (if my-or# my-or# (my-or ~@next)))))
