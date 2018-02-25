@@ -29,3 +29,12 @@
              (c-str character))
           (= ((attr :dexterity) character)
              (c-dex character))))))
+
+(deftest ex2-test
+  (testing "Exercise 2 from brave-clojure Ch5:
+           Implement the `comp` function"
+    (is (and
+          (= ((comp inc +) 2 3 4)
+             ((my-comp inc +) 2 3 4))
+          (= ((comp inc *) 2 3 4)
+             ((my-comp inc *) 2 3 4))))))

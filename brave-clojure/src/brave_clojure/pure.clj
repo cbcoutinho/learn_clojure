@@ -33,14 +33,11 @@
   "Returns a function to quickly look up a characters attribute"
   (def myfun (comp my-key :attributes)))
 
-; Test solution for Ex1
-(and
-  (=  
-    ((attr :intelligence) character)
-    (c-int character))
-  (= 
-    ((attr :strength) character)
-    (c-str character))
-  (=
-    ((attr :dexterity) character)
-    (c-dex character)))
+; Exercise 2: Implement the `comp` function
+(defn my-comp [f g]
+  "My own version of the `comp` function. Takes in two functions and
+  returns a new function. Essentially my-comp(f,g) = f(g(x))"
+  (fn [& args] (f (apply g args))))
+
+((comp inc +) 2 3)
+((my-comp inc +) 2 3)
