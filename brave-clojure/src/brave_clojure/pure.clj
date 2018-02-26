@@ -10,6 +10,8 @@
                 :strength      4
                 :dexterity     5}})
 
+; NOTE: These were overwritten by the `defattrs` macro below for
+; Exercise 3 of Chapter 7
 ; Create some composition functions to string pure functions together
 ;(def c-int (comp :intelligence :attributes))
 ;(def c-str (comp :strength     :attributes))
@@ -31,9 +33,22 @@
 
 ; Exercise 3: Attempt to create macro for setting character functions
 ;   https://www.braveclojure.com/writing-macros/
-(defmacro defattrs [& keypairs]
-  `(~partition 2 ~@keypairs))
 
+(defmacro defattrs
+  ([] nil)  ; If empty list, return nothing
+  ([x y]    ; De-structure a two element list and compose function
+   `(def ~x (comp ~y :attributes))) 
+  ([x y & next] ; If number elements > 2, split them up and recurse down
+   `(do
+     (defattrs ~x ~y)
+     (defattrs ~@next))))
+
+; Shows that `defattrs` creates some composition functions
 (macroexpand '(defattrs c-int :intelligence
                         c-str :strength
                         c-dex :dexterity))
+
+; Actually create the functions using the macro..
+(defattrs c-int :intelligence
+          c-str :strength
+          c-dex :dexterity)
