@@ -11,9 +11,9 @@
                 :dexterity     5}})
 
 ; Create some composition functions to string pure functions together
-(def c-int (comp :intelligence :attributes))
-(def c-str (comp :strength     :attributes))
-(def c-dex (comp :dexterity    :attributes))
+;(def c-int (comp :intelligence :attributes))
+;(def c-str (comp :strength     :attributes))
+;(def c-dex (comp :dexterity    :attributes))
 
 ; Exercise 1: Make a factory that creates a function using the 
 ; following signature:
@@ -27,3 +27,13 @@
   "My own version of the `comp` function. Takes in two functions and
   returns a new function. Essentially my-comp(f,g) = f(g(x))"
   (fn [& args] (f (apply g args))))
+
+
+; Exercise 3: Attempt to create macro for setting character functions
+;   https://www.braveclojure.com/writing-macros/
+(defmacro defattrs [& keypairs]
+  `(~partition 2 ~@keypairs))
+
+(macroexpand '(defattrs c-int :intelligence
+                        c-str :strength
+                        c-dex :dexterity))
