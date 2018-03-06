@@ -5,12 +5,12 @@
    :email "mitchard.blimmonsgmail.com"})
 
 (def order-details-validations
-  {:name 
+  {:name
    ["Please enter a name" not-empty]
-   
+
    :email
    ["Please enter an email address" not-empty
-    
+
     "Your email address doesn't look like an email address"
     #(or (empty? %) (re-seq #"@" %))]})
 
@@ -54,6 +54,6 @@
              (println :success)
              (println :failure my-error-name)))
 ; => (let* [my-error-name (brave-clojure.brave-true-ale/validate order-details order-details-validations)]
-;      (if (clojure.core/empty? my-error-name) 
-;        (println :success) 
+;      (if (clojure.core/empty? my-error-name)
+;        (println :success)
 ;        (println :failure my-error-name)))
