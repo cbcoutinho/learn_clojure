@@ -2,10 +2,6 @@
   (:require [overtone.live :refer :all])
   (:require [overtone.inst.drum :as drum]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
 
 ; To play, execute (demo1)
 (defn demo1 []
@@ -47,3 +43,4 @@
 (trem)
 (trem 200 60 0.8)
 (trem 60 30 0.2)
+(stop)
