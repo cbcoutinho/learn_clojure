@@ -3,13 +3,17 @@
 
 ; Database connection is either environmental variable, or localhost
 ; at the port and database name listed here
-(def spec (or (System/getenv "DATABASE_URL")
-              "postgresql://localhost:5432/shouter"))
+(def pg-db (or (System/getenv "DATABASE_URL")
+              {:dbtype "postgresql"
+               :dbname "shouter"
+               :host "localhost"
+               :port "5432"
+               :user "chris"}))
 
 ; Lists all rows of table `shouts` sorted
 (defn all []
-  (into [] (sql/query spec ["select * from shouts order by id desc"])))
+  (into [] (sql/query pg-db ["select * from shouts order by id desc"])))
 
 (defn create [shout]
-  (sql/insert! spec :shouts [:body] [shout]))
+  (sql/insert! pg-db :shouts [:body] [shout]))
 
